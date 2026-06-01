@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — Power × Compute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f6f2;--white:#fff;--navy:#0f1923;--ink:#1a1a1a;
+  --ink2:#3a3a3a;--muted:#7a7a7a;--dim:#b0b0b0;
+  --border:#e0ddd6;--accent:#1a4fa8;--accent-l:#e8eef8;
+  --gold:#b8860b;--gold-l:#fdf8e8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+
+nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--navy);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+
+.page-wrap{max-width:760px;margin:0 auto;padding:64px 48px 100px;}
+
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:40px;transition:color 0.15s;}
+.back-link:hover{color:var(--accent);}
+
+.page-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--accent);text-transform:uppercase;margin-bottom:16px;}
+.page-title{font-family:'Lora',serif;font-size:clamp(30px,4.5vw,46px);font-weight:600;line-height:1.15;letter-spacing:-0.02em;color:var(--navy);margin-bottom:12px;}
+.page-title em{font-style:italic;color:var(--accent);}
+.page-lead{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:56px;max-width:580px;}
+
+/* ── SECTION HEADERS ── */
+.sec-hd{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:24px;margin-top:56px;
+}
+.sec-hd:first-of-type{margin-top:0;}
+.sec-hd-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--dim);
+  white-space:nowrap;
+}
+.sec-hd-line{flex:1;height:1px;background:var(--border);}
+
+/* ── JOURNAL PAPER CARD ── */
+.paper-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-left:3px solid var(--accent);
+  padding:32px 28px;
+  margin-bottom:16px;
+  transition:box-shadow 0.2s;
+}
+.paper-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+
+.paper-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;}
+.paper-badges{display:flex;flex-wrap:wrap;gap:6px;}
+.badge{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  padding:3px 9px;
+}
+.badge-journal{color:var(--accent);background:var(--accent-l);border:1px solid rgba(26,79,168,0.2);}
+.badge-highlight{color:var(--gold);background:var(--gold-l);border:1px solid rgba(184,134,11,0.2);}
+.badge-conference{color:#5a7a5a;background:#f0f5f0;border:1px solid rgba(90,122,90,0.2);}
+.badge-patent{color:#7a4a7a;background:#f5f0f5;border:1px solid rgba(122,74,122,0.2);}
+
+.paper-year{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;color:var(--dim);
+  flex-shrink:0;
+}
+
+.paper-title{
+  font-family:'Lora',serif;
+  font-size:19px;font-weight:500;line-height:1.35;
+  color:var(--navy);margin-bottom:10px;
+  letter-spacing:-0.01em;
+}
+
+.paper-authors{
+  font-size:13px;color:var(--muted);
+  margin-bottom:6px;line-height:1.6;
+}
+.paper-authors strong{color:var(--ink2);font-weight:500;}
+
+.paper-venue{
+  font-size:13px;color:var(--ink2);
+  font-style:italic;margin-bottom:16px;
+}
+
+.paper-highlight{
+  display:flex;align-items:flex-start;gap:8px;
+  background:var(--gold-l);
+  border:1px solid rgba(184,134,11,0.15);
+  padding:10px 14px;
+  margin-bottom:16px;
+}
+.paper-highlight-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.paper-highlight-text{font-size:12px;color:var(--gold);line-height:1.6;font-weight:500;}
+
+.paper-abstract{
+  font-size:13px;color:var(--muted);
+  line-height:1.75;margin-bottom:18px;
+  padding-top:14px;
+  border-top:1px solid var(--border);
+}
+
+.paper-links{display:flex;gap:8px;flex-wrap:wrap;}
+.paper-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:0.04em;
+  color:var(--accent);
+  border:1px solid rgba(26,79,168,0.25);
+  padding:7px 14px;text-decoration:none;
+  transition:all 0.15s;
+}
+.paper-link:hover{background:var(--accent);color:var(--white);}
+.paper-link.disabled{color:var(--dim);border-color:var(--border);pointer-events:none;}
+
+/* Image placeholder */
+.paper-figure{
+  margin:16px 0;
+  border:1px solid var(--border);
+  background:var(--bg);
+  min-height:160px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:8px;
+}
+.paper-figure img{width:100%;display:block;}
+.paper-figure-placeholder{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--dim);letter-spacing:0.06em;
+  text-align:center;padding:24px;
+}
+
+/* ── PATENT CARD ── */
+.patent-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-left:3px solid #9b59b6;
+  padding:24px 28px;
+  margin-bottom:12px;
+}
+.patent-title{
+  font-family:'Lora',serif;
+  font-size:17px;font-weight:500;color:var(--navy);
+  margin-bottom:8px;line-height:1.35;
+}
+.patent-meta{font-size:13px;color:var(--muted);line-height:1.7;}
+.patent-meta span{color:var(--ink2);}
+
+/* ── AWARDS ── */
+.award-list{display:flex;flex-direction:column;gap:0;}
+.award-item{
+  display:grid;
+  grid-template-columns:80px 1fr;
+  gap:20px;
+  padding:20px 0;
+  border-bottom:1px solid var(--border);
+  align-items:start;
+}
+.award-item:first-child{border-top:1px solid var(--border);}
+.award-year{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--dim);
+  padding-top:2px;
+}
+.award-body{}
+.award-name{
+  font-size:15px;font-weight:500;color:var(--navy);
+  margin-bottom:3px;line-height:1.4;
+}
+.award-name.top{color:var(--gold);}
+.award-org{font-size:13px;color:var(--muted);}
+.award-note{font-size:12px;color:var(--dim);font-style:italic;margin-top:3px;}
+
+footer{background:var(--navy);padding:36px 48px;display:flex;justify-content:space-between;align-items:center;}
+footer p{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(255,255,255,0.3);}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none;}
+footer a:hover{color:#fff;}
+
+@media(max-width:640px){
+  nav{padding:0 20px;}
+  .page-wrap{padding:48px 20px 60px;}
+  .award-item{grid-template-columns:1fr;gap:4px;}
+  footer{flex-direction:column;gap:8px;padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Power <span>×</span> Compute</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Blog</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="publications.html" class="active">Publications</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+  <a href="index.html" class="back-link">← Home</a>
+
+  <div class="page-eyebrow">Research Output</div>
+  <h1 class="page-title">Publications <em>&amp;</em> Awards</h1>
+  <p class="page-lead">Peer-reviewed research in power systems engineering, with work on HVDC control, offshore wind integration, and microgrid optimization. IEEE Transactions on Power Systems · Energies.</p>
+
+  <!-- ══ JOURNAL PAPERS ══ -->
+  <div class="sec-hd">
+    <span class="sec-hd-label">Journal Papers</span>
+    <div class="sec-hd-line"></div>
+  </div>
+
+  <!-- Paper 1 -->
+  <div class="paper-card">
+    <div class="paper-top">
+      <div class="paper-badges">
+        <span class="badge badge-journal">IEEE Transactions on Power Systems</span>
+        <span class="badge badge-highlight">⭐ Top 50 Most Accessed</span>
+      </div>
+      <span class="paper-year">2022</span>
+    </div>
+
+    <div class="paper-title">
+      Optimal Secondary Control to Suppress Voltage Fluctuations in an HVDC-linked Wind Farm Grid
+    </div>
+
+    <div class="paper-authors">
+      <strong>B. Jeong</strong>, D. Kwon, J. Park, Y. Kim, and O. Gomis-Bellmunt
+    </div>
+
+    <div class="paper-venue">
+      IEEE Transactions on Power Systems, vol. 37, no. 4, pp. 2563–2577, July 2022
+    </div>
+
+    <div class="paper-highlight">
+      <span class="paper-highlight-icon">🏆</span>
+      <span class="paper-highlight-text">Selected as one of the 50 most frequently accessed documents in IEEE Transactions on Power Systems — July 2022</span>
+    </div>
+
+    <div class="paper-abstract">
+      Proposes an optimal secondary control framework for suppressing voltage fluctuations in an HVDC-connected offshore wind farm grid. Develops a VSC-HVDC small-signal model integrating wind turbines, DFIGs, and bidirectional AC/DC converters, and designs an LQG controller for coordinated voltage control — validated against KEPCO's actual offshore grid configuration.
+    </div>
+
+    <div class="paper-figure" style="min-height:unset;flex-direction:column;gap:0;background:var(--white);">
+      <img src="images/paper1-fig1.png" alt="Fig. 1 — Schematic diagram of the proposed SVC strategy for real-time voltage regulation in an HVDC-linked OWF grid" style="width:100%;display:block;border-bottom:1px solid var(--border);">
+      <div style="padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);background:var(--bg);">Fig. 1 — SVC strategy schematic for real-time voltage regulation in HVDC-linked OWF grid</div>
+    </div>
+
+    <div class="paper-figure" style="min-height:unset;flex-direction:column;gap:0;background:var(--white);margin-top:8px;">
+      <img src="images/paper1-fig2.png" alt="Fig. 2 — Central LQG regulator control architecture" style="width:100%;display:block;border-bottom:1px solid var(--border);">
+      <div style="padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);background:var(--bg);">Fig. 2 — Central LQG regulator generating optimal reference signals for local controllers</div>
+    </div>
+
+    <div class="paper-figure" style="min-height:unset;flex-direction:column;gap:0;background:var(--white);margin-top:8px;">
+      <img src="images/paper1-fig3.png" alt="Fig. 14–15 — Simulation results under continuous wind speed variations" style="width:100%;display:block;border-bottom:1px solid var(--border);">
+      <div style="padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);background:var(--bg);">Fig. 14–15 — Voltage responses under continuous wind speed variations (Cases 1–3)</div>
+    </div>
+
+    <div class="paper-links" style="margin-top:20px;">
+      <a href="https://ieeexplore.ieee.org/document/9594694" target="_blank" class="paper-link">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        IEEE Xplore
+      </a>
+      <a href="https://doi.org/10.1109/TPWRS.2021.3122201" target="_blank" class="paper-link">DOI</a>
+    </div>
+  </div>
+
+  <!-- Paper 2 -->
+  <div class="paper-card">
+    <div class="paper-top">
+      <div class="paper-badges">
+        <span class="badge badge-journal">Energies (MDPI)</span>
+      </div>
+      <span class="paper-year">2019</span>
+    </div>
+
+    <div class="paper-title">
+      Implementation of Optimal Two-Stage Scheduling of Energy Storage System Based on Big-Data-Driven Forecasting — An Actual Case Study in a Campus Microgrid
+    </div>
+
+    <div class="paper-authors">
+      <strong>B. Jeong</strong>, D. Shin, J. Im, J. Park, and Y. Kim
+    </div>
+
+    <div class="paper-venue">
+      Energies, vol. 12, no. 6, pp. 1–20, March 2019
+    </div>
+
+    <div class="paper-abstract">
+      Implements a big-data-driven two-stage ESS scheduling framework using Mixed Integer Linear Programming, validated on an actual campus microgrid with PV and storage. Compared open-source solvers (CBC, GLPK) against commercial solvers (CPLEX, Gurobi) and demonstrated real-time operational feasibility — POSCO-funded and verified at POSTECH campus.
+    </div>
+
+    <div class="paper-figure" style="min-height:unset;flex-direction:column;gap:0;background:var(--white);">
+      <img src="images/paper2-fig1.png" alt="Fig. 2 — Configuration of the implemented campus microgrid" style="width:100%;display:block;border-bottom:1px solid var(--border);">
+      <div style="padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);background:var(--bg);">Fig. 2 — Configuration of the implemented campus MG with IoT platform, SCADA, and Microgrid EMS</div>
+    </div>
+
+    <div class="paper-figure" style="min-height:unset;flex-direction:column;gap:0;background:var(--white);margin-top:8px;">
+      <img src="images/paper2-fig2.png" alt="Fig. 3 — Time framework for the proposed two-stage scheduling" style="width:100%;display:block;border-bottom:1px solid var(--border);">
+      <div style="padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);background:var(--bg);">Fig. 3 — Time framework: day-ahead and hour-ahead scheduling with optimal battery charge/discharge profiles</div>
+    </div>
+
+    <div class="paper-figure" style="min-height:unset;flex-direction:column;gap:0;background:var(--white);margin-top:8px;">
+      <img src="images/paper2-fig3.png" alt="Fig. 4 — Flowchart of the proposed two-stage scheduling" style="width:100%;display:block;border-bottom:1px solid var(--border);">
+      <div style="padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);background:var(--bg);">Fig. 4 — Flowchart of the proposed two-stage MILP scheduling algorithm for one day</div>
+    </div>
+
+    <div class="paper-links" style="margin-top:20px;">
+      <a href="https://www.mdpi.com/1996-1073/12/6/1124" target="_blank" class="paper-link">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        MDPI Open Access
+      </a>
+      <a href="https://doi.org/10.3390/en12061119" target="_blank" class="paper-link">DOI</a>
+    </div>
+  </div>
+
+  <!-- ══ CONFERENCE ══ -->
+  <div class="sec-hd">
+    <span class="sec-hd-label">Conference</span>
+    <div class="sec-hd-line"></div>
+  </div>
+
+  <div class="paper-card" style="border-left-color:#5a7a5a;">
+    <div class="paper-top">
+      <div class="paper-badges">
+        <span class="badge badge-conference">KIEE Conference</span>
+      </div>
+      <span class="paper-year">2019</span>
+    </div>
+    <div class="paper-title">Development and Verification of Small-Signal Model of Voltage Source Converter-Based HVDC</div>
+    <div class="paper-authors"><strong>B. Jeong</strong>, J. Park, and Y. Kim</div>
+    <div class="paper-venue">Korean Institute of Electrical Engineers (KIEE) Annual Spring Conference, May 2019</div>
+  </div>
+
+  <!-- ══ PATENTS ══ -->
+  <div class="sec-hd">
+    <span class="sec-hd-label">Patents</span>
+    <div class="sec-hd-line"></div>
+  </div>
+
+  <div class="patent-card">
+    <div class="paper-badges" style="margin-bottom:12px;">
+      <span class="badge badge-patent">KR Patent · Pending</span>
+    </div>
+    <div class="patent-title">Data-based Optimal Frequency Control System and Frequency Controller Design Method of LCC-HVDC System</div>
+    <div class="patent-meta">
+      D. Kwon, Y. Kim, and <span>B. Jeong</span> · Application No. <span>10-2021-0123669</span>
+    </div>
+  </div>
+
+  <div class="patent-card">
+    <div class="paper-badges" style="margin-bottom:12px;">
+      <span class="badge badge-patent">KR Patent · Pending</span>
+    </div>
+    <div class="patent-title">LCC-HVDC Frequency Control System on Both Sides of the Grid</div>
+    <div class="patent-meta">
+      D. Kwon, Y. Kim, and <span>B. Jeong</span> · Application No. <span>10-2019-0179760</span>
+    </div>
+  </div>
+
+  <!-- ══ AWARDS ══ -->
+  <div class="sec-hd">
+    <span class="sec-hd-label">Awards &amp; Recognition</span>
+    <div class="sec-hd-line"></div>
+  </div>
+
+  <div class="award-list">
+
+    <div class="award-item">
+      <div class="award-year">2024</div>
+      <div class="award-body">
+        <div class="award-name">Exemplary Employee Award</div>
+        <div class="award-org">Korea Institute of Energy Technology Evaluation and Planning (KETEP)</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-year">2023</div>
+      <div class="award-body">
+        <div class="award-name top">Minister of Trade, Industry and Energy Award</div>
+        <div class="award-org">Ministry of Trade, Industry and Energy (MOTIE), Republic of Korea</div>
+        <div class="award-note">Recognized for outstanding contributions to national energy R&D policy and smart grid programs</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-year">2022</div>
+      <div class="award-body">
+        <div class="award-name">Top 50 Most Accessed — IEEE Transactions on Power Systems</div>
+        <div class="award-org">Institute of Electrical and Electronics Engineers (IEEE)</div>
+        <div class="award-note">July 2022 · "Optimal Secondary Control to Suppress Voltage Fluctuations in an HVDC-linked Wind Farm Grid"</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-year">2019</div>
+      <div class="award-body">
+        <div class="award-name">KEPCO Scholarship</div>
+        <div class="award-org">Korea Electric Power Corporation</div>
+        <div class="award-note">Selected for outstanding graduate research in power systems engineering</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-year">2018</div>
+      <div class="award-body">
+        <div class="award-name">Best Undergraduate Student in Engineering</div>
+        <div class="award-org">Pusan National University (PNU) · Summa Cum Laude · GPA 4.26/4.5</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-year">2017</div>
+      <div class="award-body">
+        <div class="award-name">4th Place — Power Software Competitive Exhibition</div>
+        <div class="award-org">Korean Institute of Electrical Engineers (KIEE)</div>
+        <div class="award-note">Power flow program implemented in C language</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Byeongcheol Jeong · Power × Compute</p>
+  <p><a href="index.html">Blog</a> · <a href="about.html">About</a></p>
+</footer>
+
+</body>
+</html>

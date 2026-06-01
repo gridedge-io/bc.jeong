@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Power × Compute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f6f2;--white:#ffffff;--navy:#0f1923;--ink:#1a1a1a;--ink2:#3a3a3a;--muted:#7a7a7a;--dim:#b0b0b0;--border:#e0ddd6;--accent:#1a4fa8;--accent-l:#e8eef8;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--navy);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.page-wrap{max-width:700px;margin:0 auto;padding:72px 48px 100px;}
+.page-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;}
+.page-title{font-family:'Lora',serif;font-size:clamp(34px,5vw,52px);font-weight:600;line-height:1.15;letter-spacing:-0.02em;color:var(--navy);margin-bottom:40px;}
+.page-title em{font-style:italic;color:var(--accent);}
+.about-lead{font-size:19px;font-weight:300;color:var(--ink2);line-height:1.8;margin-bottom:40px;border-left:3px solid var(--accent);padding-left:20px;}
+.prose p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:22px;}
+.prose p strong{color:var(--ink);font-weight:500;}
+.prose p a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.15s;}
+.prose p a:hover{border-bottom-color:var(--accent);}
+.prose h3{font-family:'Lora',serif;font-size:22px;font-weight:500;color:var(--navy);margin:44px 0 16px;}
+.focus-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.focus-list li{font-size:15px;color:var(--ink2);display:flex;align-items:center;gap:10px;}
+.focus-list li::before{content:'▹';color:var(--accent);font-size:12px;flex-shrink:0;}
+.tl{display:flex;flex-direction:column;margin-bottom:24px;}
+.tl-row{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--border);}
+.tl-row:first-child{border-top:1px solid var(--border);}
+.tl-period{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);padding-top:3px;}
+.tl-role{font-family:'Lora',serif;font-size:17px;font-weight:500;color:var(--navy);margin-bottom:2px;}
+.tl-org{font-size:13px;color:var(--muted);}
+.contact-block{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--accent);padding:32px;margin-top:48px;}
+.cb-title{font-family:'Lora',serif;font-size:22px;font-weight:500;color:var(--navy);margin-bottom:12px;}
+.cb-text{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+.cb-links{display:flex;gap:12px;flex-wrap:wrap;}
+.cb-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink2);border:1px solid var(--border);padding:10px 18px;text-decoration:none;transition:all 0.15s;}
+.cb-link:hover{border-color:var(--accent);color:var(--accent);}
+footer{background:var(--navy);padding:36px 48px;display:flex;justify-content:space-between;align-items:center;}
+footer p{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(255,255,255,0.3);}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none;}
+footer a:hover{color:#fff;}
+@media(max-width:640px){nav{padding:0 20px;}.page-wrap{padding:48px 20px 60px;}.tl-row{grid-template-columns:1fr;}footer{flex-direction:column;gap:8px;padding:24px 20px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Power <span>×</span> Compute</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Blog</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+  </ul>
+</nav>
+<div class="page-wrap">
+  <div class="page-eyebrow">About</div>
+  <h1 class="page-title">Science · Investment · <em>Ideas</em></h1>
+  <p class="about-lead">I started Power × Compute to think in public about a question I can't stop working on: as AI workloads become the dominant driver of electricity demand, how does the grid adapt — and who builds what comes next?</p>
+  <div class="prose">
+    <p>I am a <strong>Power Systems Researcher and Energy Venture Investor</strong> working at the convergence of electricity infrastructure and artificial intelligence. My background spans engineering, policy, and investment — an unusual combination that consistently reveals new angles on how infrastructure evolves.</p>
+    <p>I hold an M.S. in Power Systems Engineering from <strong>POSTECH</strong>, with IEEE-published research on grid stability and HVDC control. I am currently a PhD candidate focused on the power dynamics of AI data centers and real-time grid control — specifically, how data centers can shift from passive loads to active grid resources.</p>
+    <p>In parallel, I work as an <strong>Investment Director at Samsung Venture Investment (CVC)</strong>, evaluating startups at the AI-energy intersection: grid software, power electronics, flexible load management, and next-generation storage.</p>
+    <p>Before that, I spent five years as a <strong>Senior Researcher at KETEP</strong> (Korea Institute of Energy Technology Evaluation and Planning), a government-funded agency under the Ministry of Trade, Industry and Energy (MOTIE — 산업통상자원부). Across two divisions, I secured and managed national energy R&D budgets in coordination with MOTIE, the Ministry of Science and ICT, and the Ministry of Economy and Finance — integrating carbon neutrality and green new deal directives into R&D planning cycles. In the Electric Power Industry Division, I evaluated smart grid projects including VPP integration platforms for variable renewable energy and ISO-DSO cooperative operation systems. I also served on MOTIE's 2030 Energy Advisory Group, contributing policy recommendations on energy security, rare earth supply chains, LNG strategy, and nuclear power.</p>
+    <p>The goal of this blog: find ideas that present real value — grounded in how electricity markets actually work, how power systems actually behave, and where capital is actually needed.</p>
+    <h3>Current Research Focus</h3>
+    <ul class="focus-list">
+      <li>AI data center power dynamics and real-time control</li>
+      <li>Inference-Aware Forecasting (IAF) — a new paradigm for grid demand modeling</li>
+      <li>GPU dynamic power modeling (LPV, SINDy, DMDc)</li>
+      <li>Grid-aware computing: AI workloads as ancillary service assets</li>
+      <li>HVDC-data center cooperative control strategies</li>
+    </ul>
+    <h3>Career</h3>
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-period">Now</div>
+        <div><div class="tl-role">Investment Director</div><div class="tl-org">Samsung Venture Investment · CVC · Energy & Deep Tech</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-period">Now</div>
+        <div><div class="tl-role">PhD Researcher</div><div class="tl-org">POSTECH · AI Data Center Power Systems</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-period">Past</div>
+        <div><div class="tl-role">Senior Researcher</div><div class="tl-org">KETEP · R&D Planning & Electric Power Industry Division · MOTIE 2030 Advisory Group</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-period">M.S.</div>
+        <div><div class="tl-role">Power Systems Engineering</div><div class="tl-org">POSTECH · IEEE Publications (SCI, 2 papers)</div></div>
+      </div>
+    </div>
+    <h3>Investment Themes</h3>
+    <p>At Samsung Ventures I focus on companies building at the AI-energy intersection: grid software and markets, power electronics (SiC/GaN, SST), AI data center power architecture, flexible computing, next-generation storage, and transmission infrastructure. My thesis is structural — the boundary between computation and electricity is dissolving, and the companies that understand both will define the next infrastructure layer.</p>
+  </div>
+  <div class="contact-block">
+    <div class="cb-title">Get in Touch</div>
+    <div class="cb-text">Interested in AI infrastructure, grid technology, or energy venture? Happy to connect — especially around research collaboration, investment discussions, or ideas that bridge the two.</div>
+    <div class="cb-links">
+      <a href="https://linkedin.com/in/" target="_blank" class="cb-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg>
+        LinkedIn
+      </a>
+      <a href="mailto:your@email.com" class="cb-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Email
+      </a>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>© 2025 Byeongcheol Jeong · Power × Compute</p>
+  <p><a href="index.html">Blog</a> · <a href="mailto:your@email.com">Contact</a></p>
+</footer>
+</body>
+</html>

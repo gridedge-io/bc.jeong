@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From GDP to Tokens: Rethinking Power Demand in the Age of AI Inference — Power × Compute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f6f2;--white:#fff;--navy:#0f1923;--ink:#1a1a1a;--ink2:#3a3a3a;--muted:#7a7a7a;--dim:#b0b0b0;--border:#e0ddd6;--accent:#1a4fa8;--accent-l:#e8eef8;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--navy);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover{color:var(--ink);}
+.article-wrap{max-width:680px;margin:0 auto;padding:64px 48px 120px;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:40px;transition:color 0.15s;}
+.back-link:hover{color:var(--accent);}
+.meta-top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.meta-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--accent);background:var(--accent-l);padding:3px 10px;}
+.meta-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);}
+.meta-read{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);}
+.article-title{font-family:'Lora',serif;font-size:clamp(26px,4vw,42px);font-weight:600;line-height:1.15;letter-spacing:-0.02em;color:var(--navy);margin-bottom:20px;}
+.article-lede{font-size:18px;font-weight:300;color:var(--ink2);line-height:1.8;border-left:3px solid var(--accent);padding-left:20px;margin-bottom:40px;}
+.article-body h2{font-family:'Lora',serif;font-size:22px;font-weight:500;color:var(--navy);margin:44px 0 14px;letter-spacing:-0.01em;}
+.article-body h3{font-family:'Lora',serif;font-size:18px;font-weight:500;font-style:italic;color:var(--navy);margin:32px 0 10px;}
+.article-body p{font-size:16px;color:var(--ink2);line-height:1.9;margin-bottom:20px;}
+.article-body p strong{color:var(--ink);font-weight:500;}
+.article-body p em{font-style:italic;}
+.article-body blockquote{border-left:3px solid var(--accent);padding:14px 20px;background:var(--white);margin:28px 0;font-family:'Lora',serif;font-style:italic;font-size:17px;color:var(--navy);line-height:1.65;}
+.article-body ul{list-style:none;margin:0 0 20px;padding:0;}
+.article-body ul li{font-size:15px;color:var(--ink2);line-height:1.8;padding:6px 0 6px 22px;position:relative;border-bottom:1px solid var(--border);}
+.article-body ul li:last-child{border-bottom:none;}
+.article-body ul li::before{content:'▹';color:var(--accent);font-size:11px;position:absolute;left:0;top:9px;}
+.callout{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--accent);padding:22px 26px;margin:32px 0;}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:8px;}
+.callout p{font-size:14px;color:var(--ink2);line-height:1.75;margin:0;}
+.four-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0;}
+.four-item{background:var(--white);border:1px solid var(--border);border-top:2px solid var(--accent);padding:16px 18px;}
+.four-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);margin-bottom:6px;}
+.four-title{font-size:14px;font-weight:500;color:var(--navy);margin-bottom:4px;}
+.four-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+.divider{border:none;border-top:1px solid var(--border);margin:44px 0;}
+.author-block{background:var(--white);border:1px solid var(--border);padding:24px;margin-top:48px;}
+.author-name{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--navy);margin-bottom:2px;}
+.author-role{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.author-bio{font-size:13px;color:var(--ink2);line-height:1.7;}
+.author-bio a{color:var(--accent);text-decoration:none;}
+footer{background:var(--navy);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;}
+footer p{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(255,255,255,0.3);}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none;}
+footer a:hover{color:#fff;}
+@media(max-width:640px){nav{padding:0 20px;}.article-wrap{padding:48px 20px 80px;}.four-grid{grid-template-columns:1fr;}footer{flex-direction:column;gap:8px;padding:24px 20px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">Power <span>×</span> Compute</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Blog</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../publications.html">Publications</a></li>
+  </ul>
+</nav>
+
+<div class="article-wrap">
+  <a href="../index.html" class="back-link">← All Essays</a>
+
+  <div class="meta-top">
+    <span class="meta-tag">FORECASTING · AI · POWER DEMAND</span>
+    <span class="meta-date">2025</span>
+    <span class="meta-read">· 9 min read</span>
+  </div>
+  <h1 class="article-title">From GDP to Tokens: Rethinking Power Demand in the Age of AI Inference</h1>
+  <p class="article-lede">
+    Power demand has always been explained by temperature, GDP, and industrial activity. AI inference is breaking every one of those assumptions — not by consuming more energy, but by changing the function that determines demand itself.
+  </p>
+
+  <div class="article-body">
+
+    <p>
+      The rapid growth of AI inference workloads is shaking the foundational assumptions of power demand forecasting. For decades, electricity demand could be reasonably explained by macroeconomic variables — temperature, GDP, industrial utilization rates. That worked. But as AI data centers, and inference-centric computing in particular, expand across the grid, power demand can no longer be explained by demand volume alone. It is moving toward being <strong>determined by computational structure.</strong> This is not a demand increase. The determinant function itself is changing.
+    </p>
+
+    <h2>Redefining What "AI Uses a Lot of Power" Actually Means</h2>
+
+    <p>
+      The first step is to challenge the prevailing framing. Recent Microsoft research (<em>Energy Use of AI Inference: Efficiency Pathways and Test-Time Compute</em>) found that actual per-query energy consumption for frontier-scale LLMs (200B+ parameters) in production environments is approximately 0.34 Wh — four to twenty times lower than most published estimates.
+    </p>
+    <p>
+      The number matters less than the reason for the gap. Most prior estimates failed to account for batching, concurrency, and steady-state serving conditions. Once you correct for those, the unit of analysis shifts: <strong>power demand is no longer determined by request count. It is determined by token throughput.</strong>
+    </p>
+    <p>
+      The energy structure of AI inference is precise. Per-query energy is a function of output token length and token processing speed. The decoding stage dominates energy consumption — because while input processing can be parallelized, output generation is inherently sequential, token by token.
+    </p>
+
+    <div class="callout">
+      <div class="callout-label">The Scale of the Difference</div>
+      <p>A standard query consumes approximately 0.34 Wh. A long reasoning query can reach 4.32 Wh — a 10× structural difference within the same model. If just 10% of total requests involve long inference, total system energy more than doubles.</p>
+    </div>
+
+    <h2>Why Short-Term Forecasting Is Already Broken</h2>
+
+    <p>
+      Research on actual inference cluster behavior (DynamoLLM: <em>Designing LLM Inference Clusters for Performance and Energy Efficiency</em>) shows that requests segment by input and output length into distinct types — and each type has a different optimal GPU configuration and energy profile. The same infrastructure presents entirely different energy structures depending on what's being requested.
+    </p>
+    <p>
+      More importantly, the request mix is not static. It varies significantly by service type and time of day. Coding workloads and conversational workloads have structurally different request distributions. Within a single service, the distribution shifts by hour and day. And total token throughput can vary several-fold across time periods within the same system.
+    </p>
+
+    <blockquote>
+      "Power demand is not simply increasing. It varies structurally with computational patterns and time. At any given moment, an energy-efficient system configuration can rapidly become suboptimal. Short-term power demand is no longer a static forecasting problem — it is an operational optimization problem."
+    </blockquote>
+
+    <p>
+      The conventional power consumption function doesn't hold either. In traditional systems, load increase leads to roughly linear power increase. In AI inference, this relationship breaks down. GPU utilization decreases do not produce proportional power reductions. Throughput increases do not always produce energy increases. Batch size, parallelism strategy, and routing method all produce large energy variations for identical workloads.
+    </p>
+
+    <h2>What Long-Term Forecasting Looks Like From Here</h2>
+
+    <p>
+      Intuition suggests AI expansion leads to explosive power demand growth. But opposing forces are simultaneously at work. Analysis suggests that model, serving, and hardware improvements could reduce per-query energy by 8–20× over time. And data center power demand has historically been repeatedly overestimated — the internet and cloud computing both appeared set for explosive growth before efficiency improvements absorbed much of the projected increase.
+    </p>
+    <p>
+      Long-term power demand therefore cannot be expressed as a single scenario. Research by Energy and Environmental Economics (E3, <em>Forecasting Large Loads in the Age of AI and Data Centers</em>, 2025) confirms that AI data center load carries high uncertainty across growth speed, persistence, and geographic distribution — and requires range-based rather than point-estimate approaches.
+    </p>
+    <p>
+      This means long-term power demand splits into two structurally distinct problems. Short-term demand is determined by token length, request distribution, and workload mix — highly variable, and structurally resistant to time-series forecasting. Long-term demand reflects the balance between efficiency improvement and demand growth — a scenario management problem, not a prediction problem.
+    </p>
+
+    <h2>Four Things That Are Changing Simultaneously</h2>
+
+    <div class="four-grid">
+      <div class="four-item">
+        <div class="four-num">01</div>
+        <div class="four-title">Explanatory Variables</div>
+        <div class="four-desc">Economic indicators → computational structure</div>
+      </div>
+      <div class="four-item">
+        <div class="four-num">02</div>
+        <div class="four-title">Consumption Function</div>
+        <div class="four-desc">Linear → nonlinear (batch, parallelism, routing effects)</div>
+      </div>
+      <div class="four-item">
+        <div class="four-num">03</div>
+        <div class="four-title">Demand Profile</div>
+        <div class="four-desc">Stable average → high-variance time series</div>
+      </div>
+      <div class="four-item">
+        <div class="four-num">04</div>
+        <div class="four-title">Forecasting Objective</div>
+        <div class="four-desc">Accuracy → uncertainty management</div>
+      </div>
+    </div>
+
+    <h2>Forecasting Is Shifting from Time-Driven to Event-Driven</h2>
+
+    <p>
+      These changes require a redesign of the forecasting approach itself. The direction emerging from recent research is to stop directly predicting power and instead <strong>estimate demand from computational structure.</strong>
+    </p>
+    <p>
+      Concretely: model demand around token throughput (TPS), compute efficiency, and infrastructure efficiency (PUE). Use system-level signals — GPU utilization, request queue depth, batch schedules — as leading indicators. These signals often lead actual power demand by tens of minutes, which means forecasting must shift from historical-data-based to real-time-system-state-based.
+    </p>
+    <p>
+      Traditional power demand forecasting updated on hourly cycles. In AI data centers, model deployments, large batch job starts, and traffic spikes are what determine demand. Forecasting needs to be restructured as <strong>event-driven</strong>, not time-driven — with real-time reforecast capability as a core function, not an enhancement.
+    </p>
+    <p>
+      Probabilistic approaches also become essential. P50/P90 distribution-based forecasts need to serve as primary inputs to grid operations. The purpose of forecasting is shifting from accuracy improvement to uncertainty management.
+    </p>
+
+    <h2>Investment Implications</h2>
+
+    <p>
+      These structural changes translate directly into investment priorities. Four stand out:
+    </p>
+    <ul>
+      <li><strong>Assets that absorb short-term variability gain structural value.</strong> Fast-ramping generation, grid-forming ESS, and flexible load resources are not optional infrastructure — they are the mechanism for absorbing forecast uncertainty at scale.</li>
+      <li><strong>Data center–grid interconnection infrastructure becomes a bottleneck.</strong> AI demand concentrates geographically. Transmission, substation, and interconnection capacity are the binding constraint on realizing that demand.</li>
+      <li><strong>Power forecasting becomes a software problem.</strong> Workload-aware, system-aware forecasting using GPU utilization and queue depth signals is a new value chain — distinct from statistical grid forecasting and not yet well-served by existing tools.</li>
+      <li><strong>Efficiency improvement is a demand-path variable, not a cost reduction.</strong> Model compression, routing-based inference, and hardware efficiency gains don't just reduce costs — they determine the trajectory of power demand itself. The AI = power explosion narrative is too simple. The balance between demand growth and efficiency improvement is the more important variable.</li>
+    </ul>
+
+    <hr class="divider">
+
+    <p>
+      The core problem is not that our forecasts have been wrong. It's that we have been applying a single framework to structurally different forecasting problems operating on different time scales — and that framework's underlying assumptions are no longer valid.
+    </p>
+    <p>
+      To understand power demand going forward, we need to watch tokens rather than temperature, computational structure rather than GDP, workload mix rather than industrial utilization rates. <strong>Power demand is no longer a function of exogenous variables. It is a function of computation.</strong>
+    </p>
+
+  </div>
+
+  <div class="author-block">
+    <div class="author-name">Byeongcheol Jeong</div>
+    <div class="author-role">Investment Director, Samsung Venture Investment · PhD Researcher, POSTECH</div>
+    <div class="author-bio">Writing on AI infrastructure, power systems, and energy venture. Connect via <a href="https://linkedin.com/in/" target="_blank">LinkedIn</a> or <a href="mailto:your@email.com">email</a>.</div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Byeongcheol Jeong · Power × Compute</p>
+  <p><a href="../index.html">Blog</a> · <a href="../about.html">About</a></p>
+</footer>
+</body>
+</html>

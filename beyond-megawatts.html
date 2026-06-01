@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond Megawatts: Why AI Inference Data Centers Are Reshaping Power System Stability — Power × Compute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f6f2;--white:#fff;--navy:#0f1923;--ink:#1a1a1a;--ink2:#3a3a3a;--muted:#7a7a7a;--dim:#b0b0b0;--border:#e0ddd6;--accent:#1a4fa8;--accent-l:#e8eef8;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--navy);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover{color:var(--ink);}
+.article-wrap{max-width:680px;margin:0 auto;padding:64px 48px 120px;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:40px;transition:color 0.15s;}
+.back-link:hover{color:var(--accent);}
+.meta-top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.meta-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--accent);background:var(--accent-l);padding:3px 10px;}
+.meta-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);}
+.meta-read{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);}
+.article-title{font-family:'Lora',serif;font-size:clamp(26px,4vw,42px);font-weight:600;line-height:1.15;letter-spacing:-0.02em;color:var(--navy);margin-bottom:20px;}
+.article-lede{font-size:18px;font-weight:300;color:var(--ink2);line-height:1.8;border-left:3px solid var(--accent);padding-left:20px;margin-bottom:40px;}
+.article-body h2{font-family:'Lora',serif;font-size:22px;font-weight:500;color:var(--navy);margin:44px 0 14px;letter-spacing:-0.01em;}
+.article-body p{font-size:16px;color:var(--ink2);line-height:1.9;margin-bottom:20px;}
+.article-body p strong{color:var(--ink);font-weight:500;}
+.article-body p em{font-style:italic;}
+.article-body blockquote{border-left:3px solid var(--accent);padding:14px 20px;background:var(--white);margin:28px 0;font-family:'Lora',serif;font-style:italic;font-size:17px;color:var(--navy);line-height:1.65;}
+.article-body ul{list-style:none;margin:0 0 20px;padding:0;}
+.article-body ul li{font-size:15px;color:var(--ink2);line-height:1.8;padding:6px 0 6px 22px;position:relative;border-bottom:1px solid var(--border);}
+.article-body ul li:last-child{border-bottom:none;}
+.article-body ul li::before{content:'▹';color:var(--accent);font-size:11px;position:absolute;left:0;top:9px;}
+.callout{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--accent);padding:22px 26px;margin:32px 0;}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:8px;}
+.callout p{font-size:14px;color:var(--ink2);line-height:1.75;margin:0;}
+.divider{border:none;border-top:1px solid var(--border);margin:44px 0;}
+.source-note{font-size:12px;color:var(--dim);font-style:italic;border-top:1px solid var(--border);padding-top:16px;margin-top:40px;}
+.author-block{background:var(--white);border:1px solid var(--border);padding:24px;margin-top:48px;}
+.author-name{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--navy);margin-bottom:2px;}
+.author-role{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.author-bio{font-size:13px;color:var(--ink2);line-height:1.7;}
+.author-bio a{color:var(--accent);text-decoration:none;}
+footer{background:var(--navy);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;}
+footer p{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(255,255,255,0.3);}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none;}
+footer a:hover{color:#fff;}
+@media(max-width:640px){nav{padding:0 20px;}.article-wrap{padding:48px 20px 80px;}footer{flex-direction:column;gap:8px;padding:24px 20px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">Power <span>×</span> Compute</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Blog</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../publications.html">Publications</a></li>
+  </ul>
+</nav>
+
+<div class="article-wrap">
+  <a href="../index.html" class="back-link">← All Essays</a>
+
+  <div class="meta-top">
+    <span class="meta-tag">GRID · AI · STABILITY</span>
+    <span class="meta-date">2025</span>
+    <span class="meta-read">· 7 min read</span>
+  </div>
+  <h1 class="article-title">Beyond Megawatts: Why AI Inference Data Centers Are Reshaping Power System Stability</h1>
+  <p class="article-lede">
+    Most discussions of AI power demand focus on how much electricity data centers consume. That framing is already incomplete. The more important question is how inference workloads interact with the grid — dynamically, at scale, in real time.
+  </p>
+
+  <div class="article-body">
+
+    <p>
+      Reading J.P. Morgan's recent report <em>Fighting Words</em> reinforced something I've been thinking about for a while. The report goes well beyond simple energy demand forecasting — it treats data centers as large-scale power electronic loads with real implications for voltage, power quality, and grid stability. That framing matters. It's a step beyond the usual capacity-centric discussion, and it aligns closely with how I've been thinking about AI inference loads from a power systems perspective.
+    </p>
+
+    <h2>Training vs. Inference: A Fundamental Distinction</h2>
+
+    <p>
+      Most commentary on AI power demand still centers on training. But from a power systems standpoint, the more critical inflection point begins when inference becomes the dominant workload — and that transition is already underway.
+    </p>
+    <p>
+      Training loads are large, but they carry a degree of temporal flexibility. System operators can adjust scheduling in response to electricity prices or grid conditions. Some time-shifting is possible. <strong>Inference is structurally different.</strong>
+    </p>
+    <p>
+      Inference workloads operate 24/7. Latency and availability are core service constraints, not preferences. Outside of non-critical batch tasks, flexibility is extremely limited — and for real-time inference specifically, the effective flexibility is close to zero. In the medium-to-long term, inference will represent a far larger share of AI compute demand than training. The direction is clear.
+    </p>
+
+    <h2>Where Demand Response Breaks Down</h2>
+
+    <p>
+      This structural shift exposes a significant limitation in the demand response (DR) framing that dominates current discussions. It's not wrong to treat data centers as potentially flexible loads — but that framing alone is insufficient to explain their grid impact in an inference-dominant architecture.
+    </p>
+    <p>
+      DR programs assume that enrolled loads can be reliably curtailed when called. Inference data centers, constrained by service-level agreements and latency requirements, cannot easily satisfy that premise. And the power market structure compounds the problem: load reduction is not a dispatchable resource in the same way generation is.
+    </p>
+
+    <div class="callout">
+      <div class="callout-label">Key Distinction</div>
+      <p>The gap between theoretical flexibility and operationally available capacity is not a minor inefficiency. It is the difference between installed megawatts and megawatts that can be reliably used — and that gap has direct consequences for grid stability, not just demand management.</p>
+    </div>
+
+    <h2>Reframing the Engineering Problem</h2>
+
+    <p>
+      These structural changes require a fundamental reframing of how we model data centers in power systems analysis. Inference-centric data centers can no longer be adequately represented as static loads. They are more accurately described as <strong>large-scale power electronic load aggregates that interact dynamically with the grid.</strong>
+    </p>
+    <p>
+      The combination of UPS systems, rectifiers, inverters, GPU power modules, and cooling infrastructure means that the relevant engineering variables are no longer just active power consumption. What matters increasingly is:
+    </p>
+    <ul>
+      <li>Voltage and frequency sensitivity profiles</li>
+      <li>Ramp rate characteristics under load changes</li>
+      <li>Fault ride-through capability during grid disturbances</li>
+      <li>Harmonic injection characteristics from power conversion equipment</li>
+    </ul>
+    <p>
+      Recent grid operating experience has already surfaced this issue. Large electronic loads have been observed failing to ride through normal voltage disturbances and disconnecting from the grid — creating additional stress on frequency stability at exactly the wrong moment. This behavior directly challenges the foundational assumption that loads are passive.
+    </p>
+
+    <blockquote>
+      "Hundreds of MW of large electronic loads repeatedly failing to ride through normal voltage disturbances and disconnecting from the grid — this is not a hypothetical risk. It is an observed pattern in current grid operations."
+    </blockquote>
+
+    <h2>The Shift from Capacity to Dynamics</h2>
+
+    <p>
+      Viewed through this lens, the central question for data centers is shifting. The old question was: <em>how much power do they consume?</em> The emerging question is: <em>what dynamic characteristics do they present to the grid?</em>
+    </p>
+    <p>
+      In a real-time inference architecture, load shifting and demand management become secondary concerns. The primary design criterion becomes <strong>stability-preserving operation</strong> — maintaining grid integrity across voltage stability, frequency response, and power quality simultaneously. This is no longer an economic dispatch problem. It is an operating problem with stability constraints.
+    </p>
+
+    <h2>Four Technical Directions That Follow</h2>
+
+    <p>
+      The engineering implications are concrete. Four areas stand out as increasingly critical:
+    </p>
+    <ul>
+      <li><strong>Grid-forming and grid-supportive power conversion architectures.</strong> Data center power electronics need to evolve beyond passive consumption — capable of stable operation during grid disturbances and, where possible, providing reactive power support or voltage maintenance functions.</li>
+      <li><strong>Fault ride-through and fast disturbance response.</strong> This is not a protection function. It is a design requirement: absorb grid disturbances while maintaining service continuity.</li>
+      <li><strong>Power quality management as core infrastructure.</strong> Harmonic suppression, filter design, dedicated substation configuration, and reactive power control are no longer peripheral — they are load interconnection fundamentals at this scale.</li>
+      <li><strong>Grid-adjacent onsite resource coordination.</strong> Integration of batteries, gas generation, and fuel cells into coherent grid interaction strategies, reducing the amplitude of disturbances at the point of interconnection.</li>
+    </ul>
+
+    <h2>On Efficiency and the Rebound Effect</h2>
+
+    <p>
+      A reasonable counterargument holds that improving chip efficiency will contain the power problem. AI compute efficiency is indeed improving rapidly — energy per operation is declining. But model complexity and service demand are growing faster. Total power demand is expanding, not contracting.
+    </p>
+    <p>
+      More importantly, the <em>character</em> of the load is changing even as efficiency improves. Data centers are transitioning toward larger, always-on load profiles. In an inference-dominant structure, this load is sustained 24 hours a day. The stress on the power system scales nonlinearly with load size — and in an environment where large power electronic loads are continuously connected, voltage variation, frequency response, and power quality problems become entangled.
+    </p>
+
+    <hr class="divider">
+
+    <p>
+      The relationship between data centers and the power grid needs to be redefined: from large demand customer to dynamic system interacting with the grid. This is not purely a technical question. It will shape power market design, grid operating practice, and investment decision-making.
+    </p>
+    <p>
+      My view is that in AI-era power discussions, <strong>stability</strong> will displace <strong>flexibility</strong> as the dominant keyword. The power problem of AI is no longer about how much electricity is consumed. It is about how that load interacts with the grid.
+    </p>
+
+    <p class="source-note">Note: Figures referenced in the original LinkedIn version of this essay are sourced from the J.P. Morgan <em>Fighting Words</em> report.</p>
+  </div>
+
+  <div class="author-block">
+    <div class="author-name">Byeongcheol Jeong</div>
+    <div class="author-role">Investment Director, Samsung Venture Investment · PhD Researcher, POSTECH</div>
+    <div class="author-bio">Writing on AI infrastructure, power systems, and energy venture. Connect via <a href="https://linkedin.com/in/" target="_blank">LinkedIn</a> or <a href="mailto:your@email.com">email</a>.</div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Byeongcheol Jeong · Power × Compute</p>
+  <p><a href="../index.html">Blog</a> · <a href="../about.html">About</a></p>
+</footer>
+</body>
+</html>

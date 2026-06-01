@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Data Center Revolution: How the Compute Heat Rate (CHR) Is Reshaping Power Markets — Power × Compute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f6f2;--white:#fff;--navy:#0f1923;--ink:#1a1a1a;--ink2:#3a3a3a;--muted:#7a7a7a;--dim:#b0b0b0;--border:#e0ddd6;--accent:#1a4fa8;--accent-l:#e8eef8;--gold:#b8860b;--gold-l:#fdf8e8;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--navy);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover{color:var(--ink);}
+.article-wrap{max-width:680px;margin:0 auto;padding:64px 48px 120px;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:40px;transition:color 0.15s;}
+.back-link:hover{color:var(--accent);}
+.meta-top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.meta-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--accent);background:var(--accent-l);padding:3px 10px;}
+.meta-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);}
+.meta-read{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);}
+.article-title{font-family:'Lora',serif;font-size:clamp(26px,4vw,42px);font-weight:600;line-height:1.15;letter-spacing:-0.02em;color:var(--navy);margin-bottom:20px;}
+.article-lede{font-size:18px;font-weight:300;color:var(--ink2);line-height:1.8;border-left:3px solid var(--accent);padding-left:20px;margin-bottom:40px;}
+.article-body h2{font-family:'Lora',serif;font-size:22px;font-weight:500;color:var(--navy);margin:44px 0 14px;letter-spacing:-0.01em;}
+.article-body p{font-size:16px;color:var(--ink2);line-height:1.9;margin-bottom:20px;}
+.article-body p strong{color:var(--ink);font-weight:500;}
+.article-body p em{font-style:italic;}
+.article-body blockquote{border-left:3px solid var(--accent);padding:14px 20px;background:var(--white);margin:28px 0;font-family:'Lora',serif;font-style:italic;font-size:17px;color:var(--navy);line-height:1.65;}
+.article-body ul{list-style:none;margin:0 0 20px;padding:0;}
+.article-body ul li{font-size:15px;color:var(--ink2);line-height:1.8;padding:6px 0 6px 22px;position:relative;border-bottom:1px solid var(--border);}
+.article-body ul li:last-child{border-bottom:none;}
+.article-body ul li::before{content:'▹';color:var(--accent);font-size:11px;position:absolute;left:0;top:9px;}
+.chr-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px;}
+.chr-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);padding:10px 14px;text-align:left;border-bottom:2px solid var(--border);background:var(--white);}
+.chr-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--ink2);}
+.chr-table tr:hover td{background:var(--white);}
+.chr-table .highlight td{background:var(--gold-l);font-weight:500;color:var(--navy);}
+.callout{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--accent);padding:22px 26px;margin:32px 0;}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:8px;}
+.callout p{font-size:14px;color:var(--ink2);line-height:1.75;margin:0;}
+.callout.gold{border-left-color:var(--gold);}
+.callout.gold .callout-label{color:var(--gold);}
+.divider{border:none;border-top:1px solid var(--border);margin:44px 0;}
+.author-block{background:var(--white);border:1px solid var(--border);padding:24px;margin-top:48px;}
+.author-name{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--navy);margin-bottom:2px;}
+.author-role{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.author-bio{font-size:13px;color:var(--ink2);line-height:1.7;}
+.author-bio a{color:var(--accent);text-decoration:none;}
+footer{background:var(--navy);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;}
+footer p{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(255,255,255,0.3);}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none;}
+footer a:hover{color:#fff;}
+@media(max-width:640px){nav{padding:0 20px;}.article-wrap{padding:48px 20px 80px;}footer{flex-direction:column;gap:8px;padding:24px 20px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">Power <span>×</span> Compute</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Blog</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../publications.html">Publications</a></li>
+  </ul>
+</nav>
+
+<div class="article-wrap">
+  <a href="../index.html" class="back-link">← All Essays</a>
+
+  <div class="meta-top">
+    <span class="meta-tag">POWER MARKETS · CHR · INVESTMENT</span>
+    <span class="meta-date">2025</span>
+    <span class="meta-read">· 10 min read</span>
+  </div>
+  <h1 class="article-title">The AI Data Center Revolution: How the Compute Heat Rate (CHR) Is Reshaping Power Markets Toward Incentive-Driven Flexibility</h1>
+  <p class="article-lede">
+    PJM's 2026 white paper declares a structural scarcity era. Hans Royal's Compute Heat Rate concept shows why AI data centers can afford — and therefore should be paying — far more for electricity than today's market caps allow. The implications for power market design are profound.
+  </p>
+
+  <div class="article-body">
+
+    <h2>A Market Design at Its Limits</h2>
+
+    <p>
+      PJM Interconnection's May 2026 white paper, <em>Powering Reliability Through Market Design</em>, marks a clear inflection point in power market thinking. For two decades, PJM managed reliability through the Reliability Pricing Model (RPM) against a backdrop of surplus supply and predictable demand growth. That era is over.
+    </p>
+    <p>
+      The numbers are stark. Peak load in PJM was essentially flat from 1998 to 2023. Since 2023, it has been rising steeply. The causes are structural: AI data center load growth, industrial electrification, accelerating retirements of aging generators, and supply chain and permitting delays that have stretched construction timelines from three years to four to six. PJM's conclusion is direct — existing market design can no longer reliably signal investment.
+    </p>
+    <p>
+      The failure mode is a reliability trap: high scarcity prices trigger consumer backlash and political intervention, which suppresses the price signals needed to attract new supply investment. PJM's response is to make Energy and Ancillary Services market reform the common foundation across all proposed architecture paths.
+    </p>
+
+    <h2>The Compute Heat Rate: A New Demand-Side Metric</h2>
+
+    <p>
+      The quantitative framework that gives this structural shift its sharpest expression comes from Hans Royal's 2026 working paper, <em>The Compute Heat Rate</em>. The CHR is a demand-side metric that answers a specific question: given the revenue a hyperscaler earns per MWh of AI workload, what is the maximum electricity price that workload can economically sustain?
+    </p>
+
+    <table class="chr-table">
+      <thead>
+        <tr>
+          <th>Workload Type</th>
+          <th>Examples</th>
+          <th>CHR ($/MWh)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Frontier Inference</td>
+          <td>Opus, GPT-5</td>
+          <td><strong>$53,650</strong></td>
+        </tr>
+        <tr>
+          <td>Mid-Tier Inference</td>
+          <td>Sonnet, GPT-4.1</td>
+          <td>$8,120</td>
+        </tr>
+        <tr>
+          <td>Blended Average</td>
+          <td>Mixed portfolio</td>
+          <td>$6,350</td>
+        </tr>
+        <tr>
+          <td>Gas Power Plant</td>
+          <td>Traditional heat rate</td>
+          <td>~$50</td>
+        </tr>
+        <tr>
+          <td>PJM Energy Price Cap</td>
+          <td>Current market ceiling</td>
+          <td>$3,700</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Frontier inference CHR is 127 times higher than a conventional gas plant heat rate equivalent. More significantly, it is well above PJM's current energy market price cap. Royal frames this through a CONE-to-CHR Pricing Spectrum: Cost of New Entry (CONE) as a price floor, CHR as a theoretical ceiling. Under supply scarcity, prices could rise toward CHR — and AI data centers would remain economic buyers at those levels.
+    </p>
+
+    <div class="callout gold">
+      <div class="callout-label">What the CHR Changes</div>
+      <p>If scarcity pricing can move toward CHR levels, the economics of demand response transform entirely. At $50,000/MWh equivalent value, curtailing even latency-sensitive inference becomes a calculable tradeoff rather than a service compromise.</p>
+    </div>
+
+    <h2>Advanced Load Control: What Makes Data Centers Different</h2>
+
+    <p>
+      Traditional large loads — most renewables, most industrial processes — offered only binary curtailment: on or off. AI data centers enable something structurally different: <strong>graduated, continuous load reduction.</strong>
+    </p>
+    <p>
+      The mechanism combines three layers. First, workload shifting: AI training workloads (roughly 40% of typical hyperscaler compute) can be rescheduled using checkpointing and gradient accumulation techniques without service impact. Second, on-site resource dispatch: behind-the-meter batteries and generators can discharge to reduce grid draw during price spikes. Third, software-integrated control: unified scheduling and dispatch systems can respond to price signals across all three layers simultaneously.
+    </p>
+    <p>
+      PJM's white paper explicitly designates AI data centers as a <em>historic opportunity</em> for demand-side participation. All three proposed market architecture paths require Energy and Ancillary Services reform that enables this participation.
+    </p>
+
+    <h2>The Inference Constraint and the Mobility Paradox</h2>
+
+    <p>
+      The obvious objection is that real-time inference cannot be curtailed. Latency-sensitive frontier and mid-tier inference — the highest-CHR workloads — have service quality constraints that make demand response participation practically difficult. And hyperscalers can simply relocate to cheaper regions, draining the value of any local market design.
+    </p>
+    <p>
+      Royal's response to the relocation argument is the <strong>Mobility Paradox</strong>: hyperscaler mobility doesn't eliminate demand, it redistributes it. And critically, already-built high-value inference infrastructure cannot easily move due to latency constraints to end users. The result is that mobile new demand migrates to cheaper regions while immobile existing infrastructure — alongside traditional residential and industrial load — faces increasing price pressure.
+    </p>
+    <p>
+      This doesn't eliminate the inference constraint. It means the market design problem has two distinct layers: creating incentives strong enough for training and batch inference to actively participate, while designing contracts and compensation structures that make even latency-sensitive inference an economic participant at the margin.
+    </p>
+
+    <h2>What Market Design Should Look Like</h2>
+
+    <p>
+      Pure price signals are insufficient to drive active hyperscaler participation. The most effective structure combines pricing with performance guarantees — a hybrid approach. Two specific mechanisms stand out:
+    </p>
+    <ul>
+      <li><strong>Priority Flexible Reserve Contracts for real-time inference.</strong> Curtailment triggers CHR-based compensation with latency SLA guarantees — making the curtailment a revenue event rather than a service disruption.</li>
+      <li><strong>Additional capacity credits for behind-the-meter discharge.</strong> Co-location battery resources discharging during grid stress events receive credit incentives that make the investment economics more attractive independent of energy arbitrage.</li>
+    </ul>
+    <p>
+      The technical infrastructure that makes this work at millisecond timescales already exists or is rapidly maturing: Solid State Transformers, high-speed converters, and power electronics-based control systems capable of precise load ramping with minimal service disruption. Quantifying exactly who contributed what to a given control event — and compensating accordingly — remains technically challenging today. But the trajectory is clear, and the market design should anticipate that capability rather than wait for it.
+    </p>
+
+    <div class="callout">
+      <div class="callout-label">The Core Argument</div>
+      <p>Performance-based market incentives — not administrative mandates — are the path to bringing data centers into active grid participation. CHR-based compensation combined with real-time control performance bonuses is the most realistic and durable approach.</p>
+    </div>
+
+    <h2>The Market Design That Follows</h2>
+
+    <p>
+      Looking forward, the most critical technologies in an AI data center–dominated power market will be real-time price signal infrastructure and AI-driven flexibility orchestration platforms. Dynamic reserve products combining CHR and scarcity pricing with sub-minute coordination of data center, distributed resource, and consumer loads could redefine how grid reliability is maintained.
+    </p>
+    <p>
+      If latency-aware curtailment protocols and CHR-indexed financial derivatives become standard instruments, ISOs shift from supply-side regulators to demand-and-flexibility-centered market designers. That transition is not inevitable, but the economic logic supporting it is becoming harder to ignore.
+    </p>
+
+    <hr class="divider">
+
+    <p>
+      Reliability and economic efficiency in the AI era cannot be achieved through supply expansion alone. CHR-class demand-side metrics need to become standard inputs to market design. When incentive structures can coordinate even real-time inference economically, a genuinely sustainable grid becomes achievable — one that treats the most sophisticated demand as a system resource rather than a problem to be managed.
+    </p>
+
+  </div>
+
+  <div class="author-block">
+    <div class="author-name">Byeongcheol Jeong</div>
+    <div class="author-role">Investment Director, Samsung Venture Investment · PhD Researcher, POSTECH</div>
+    <div class="author-bio">Writing on AI infrastructure, power systems, and energy venture. Connect via <a href="https://linkedin.com/in/" target="_blank">LinkedIn</a> or <a href="mailto:your@email.com">email</a>.</div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Byeongcheol Jeong · Power × Compute</p>
+  <p><a href="../index.html">Blog</a> · <a href="../about.html">About</a></p>
+</footer>
+</body>
+</html>
